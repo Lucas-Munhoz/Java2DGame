@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import JavaGame.src.entities.*;
+import JavaGame.src.game.Game;
+
 import java.awt.Graphics;
 
 //Cor hexadecimal no java = '0x' + FF (opacidade, nesse caso 100%) + cor em hexa (ex vermelho FF0000)
@@ -26,6 +29,9 @@ public class World {
                 for(int yy = 0; yy < map.getHeight(); yy++){
                     int pixelAtual = pixels[xx + (yy * map.getWidth())];
 
+                    //Floor
+                    tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16, yy*16, Tile.TILE_FLOOR);
+
                     if(pixelAtual == 0xFF000000){
                         //Floor
                         tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16, yy*16, Tile.TILE_FLOOR);
@@ -36,11 +42,24 @@ public class World {
                     }
                     else if(pixelAtual == 0xFF0026FF){
                         //Player
-                        tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16, yy*16, Tile.TILE_FLOOR);
+                        Game.player.setX(xx*16);
+                        Game.player.setY(yy*16);
                     }
-                    else{
-                        //Floor
-                        tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16, yy*16, Tile.TILE_FLOOR);
+                    else if(pixelAtual == 0xFFFF0000){
+                        //Enemy
+                        Game.entities.add(new Enemy(xx*16,yy*16,16,16,Entity.ENEMY_EN));
+                    }
+                    else if(pixelAtual == 0xFFFF6A00){
+                        //Weapon
+                        Game.entities.add(new Weapon(xx*16,yy*16,16,16,Entity.WEAPON_EN));
+                    }
+                    else if(pixelAtual == 0xFFE5BF00){
+                        //Ammunition
+                        Game.entities.add(new Ammunition(xx*16,yy*16,16,16,Entity.AMMUNITION_EN));
+                    }
+                    else if(pixelAtual == 0xFF0A2100){
+                        //Protein powder
+                        Game.entities.add(new ProteinPowder(xx*16, yy*16,16,16,Entity.PROTEINPOWDER_EN));
                     }
                 }
             }

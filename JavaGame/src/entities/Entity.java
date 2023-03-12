@@ -3,7 +3,15 @@ package JavaGame.src.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import JavaGame.src.game.Game;
+
 public class Entity {
+
+	public static BufferedImage LIFEPACK_EN = Game.spritesheet.getSprite(144,0,16,16);
+	public static BufferedImage WEAPON_EN = Game.spritesheet.getSprite(144,16,16,16);
+	public static BufferedImage AMMUNITION_EN = Game.spritesheet.getSprite(144,32,16,16);
+	public static BufferedImage PROTEINPOWDER_EN = Game.spritesheet.getSprite(144,144,16,16);
+	public static BufferedImage ENEMY_EN = Game.spritesheet.getSprite(16*2,16*4,16,16);
 
 	protected double x;
 	protected double y;
